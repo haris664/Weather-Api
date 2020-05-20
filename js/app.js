@@ -1,4 +1,5 @@
 const apiKey = '52242a7b53e46644d662c726ecc77efe';
+const todayWeatherEle = document.querySelector('.current-conditions');
 
 if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(setPosition,showError);
@@ -23,7 +24,15 @@ function getWeather(latitude,longitude) {
       throw new Error('something went wrong');
     }
   })
-  .then(data => {
-    console.log(data)
+  .then(currentWeather => {
+    todayWeatherEle.textContent = '';
+    todayWeatherEle.insertAdjacentHTML('afterbegin', `
+    <h2>Current Conditions</h2>
+    <img src="http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png" />
+    <div class="current">
+      <div class="temp">${Math.round(currentWeather.main.temp)}&deg;C</div>
+      <div class="condition">${currentWeather.weather[0].description}</div>
+    </div>
+    `)
   })
 }
