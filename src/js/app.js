@@ -81,6 +81,7 @@ function getWeather(latitude,longitude) {
 
 function displayWeekWeather() {
   forecastEle.innerHTML = '';
+  
   forecastWeather.forEach(week => {
     if (week.date.getDay() !== new Date().getDay()) {
     forecastEle.insertAdjacentHTML('beforeend', `
@@ -89,7 +90,7 @@ function displayWeekWeather() {
           <img src="http://openweathermap.org/img/wn/${week.icon}@2x.png" />
           <div class="description">${week.description}</div>
           <div class="temp">
-            <span class="high">${week.high}℃</span>/<span class="low">${week.low}℃</span>
+            <span class="high">${week.high}&deg;C</span>/<span class="low">${week.low}&deg;C</span>
           </div>
         </div>
     `)
