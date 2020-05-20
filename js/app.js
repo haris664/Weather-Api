@@ -35,4 +35,17 @@ function getWeather(latitude,longitude) {
     </div>
     `)
   })
+
+  fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`)
+  .then(response => {
+    if(response.ok) {
+      return response.json();
+    } else {
+      throw new Error('there is something wrong');
+    }
+  })
+  .then(forecast => {
+    console.log(forecast)
+  })
+
 }
