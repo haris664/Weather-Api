@@ -20,6 +20,7 @@ function transpileJs() {
   .pipe(babel1({
     presets: ['@babel/env']
   }))
+  .pipe(uglify())
   .pipe(gulp.dest('dist/js'))
 }
 
@@ -37,4 +38,4 @@ function sync() {
   });
 }
 
-exports.default = gulp.parallel(html,minifyCss,transpileJs,sync,watch);
+exports.default = gulp.parallel(html,minifyCss,transpileJs,watch,sync);
