@@ -7,9 +7,23 @@ if ('geolocation' in navigator) {
 function setPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  console.log(latitude,longitude)
+  getWeather(latitude,longitude);
 }
 
 function showError(error) {
   console.log(error.message)
+}
+
+function getWeather(latitude,longitude) {
+  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`)
+  .then(resp => {
+    if(resp.ok) {
+      return resp.json();
+    } else {
+      throw new Error('something went wrong');
+    }
+  })
+  .then(data => {
+    console.log(data)
+  })
 }
