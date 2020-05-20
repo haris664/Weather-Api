@@ -61,6 +61,16 @@ function getWeather(latitude,longitude) {
           date:findDay,
         })
       } else {
+        if (findDay.getHours() === 15) {
+          dates.icon = weekDays.weather[0].icon;
+          dates.description = weekDays.weather[0].description;
+        }
+
+        if (dates.low > Math.round(weekDays.main.temp)) {
+          dates.low = Math.round(weekDays.main.temp);
+        } else if (dates.high < Math.round(weekDays.main.temp)) {
+          dates.high = Math.round(weekDays.main.temp)
+        }
         console.log(forecastWeather)
       }
     })
