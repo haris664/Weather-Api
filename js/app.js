@@ -81,6 +81,18 @@ function getWeather(latitude,longitude) {
 
 function displayWeekWeather() {
   forecastEle.innerHTML = '';
-  console.log(forecastWeather)
-
+  forecastWeather.forEach(week => {
+    if (week.date.getDay() !== new Date().getDay()) {
+    forecastEle.insertAdjacentHTML('beforeend', `
+    <div class="day">
+          <h3>${days[week.date.getDay()]}</h3>
+          <img src="http://openweathermap.org/img/wn/${week.icon}@2x.png" />
+          <div class="description">${week.description}</div>
+          <div class="temp">
+            <span class="high">${week.high}℃</span>/<span class="low">${week.low}℃</span>
+          </div>
+        </div>
+    `)
+    }
+  })
 }
